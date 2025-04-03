@@ -174,7 +174,7 @@ h1.article-title {
 }
 
 .has-cover .gh-head {
-    background-color: #000 !important;
+    /* background-color: #000 !important; */
     color: #fff !important;
 }
 
