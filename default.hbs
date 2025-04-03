@@ -43,7 +43,8 @@
                 <button class="gh-burger" aria-label="Main Menu"></button>
             </div>
 
-            <nav class="gh-head-menu {{#is "home"}}rtl-content{{/is}}">
+            {{!-- Ali - Removed rtl-content class from menu --}}
+            <nav class="gh-head-menu">
                 {{navigation}}
                 {{#unless @site.members_enabled}}
                     {{#match @custom.navigation_layout "Stacked"}}
@@ -73,14 +74,7 @@
                     </div>
                 {{/unless}}
 
-                {{!-- Language switcher buttons --}}
-                <div class="language-switch">
-                    {{#is "english"}}
-                        <a href="/">فارسی</a>
-                    {{else}}
-                        <a href="/en/">English</a>
-                    {{/is}}
-                </div>
+                {{!-- Ali - Removed language switcher buttons from menu --}}
             </div>
         </div>
     </header>

@@ -112,44 +112,4 @@
     border-right-color: #fff;
 }
 
-/* Language switcher buttons */
-.language-switch {
-    display: inline-block;
-    margin-left: 20px;
-}
-
-.language-switch a {
-    display: inline-block;
-    padding: 5px 10px;
-    border-radius: 4px;
-    color: #fff;
-    background-color: var(--ghost-accent-color);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.language-switch a:hover {
-    opacity: 0.9;
-}
-
-/* Ali - Post language switcher */
-.language-switch-post {
-    text-align: center;
-    margin: 40px 0;
-}
-
-.language-switch-post a {
-    display: inline-block;
-    padding: 8px 20px;
-    border-radius: 4px;
-    color: #fff;
-    background-color: var(--ghost-accent-color);
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.language-switch-post a:hover {
-    opacity: 0.9;
-}
+/* Ali - Removed language switcher styling */
