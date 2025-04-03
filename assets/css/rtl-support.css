@@ -116,4 +116,26 @@
     direction: ltr;
 }
 
-/* Ali - Removed language switcher styling */
+/* Ali - Explicit LTR styling for English content */
+.ltr-content {
+    direction: ltr !important;
+    text-align: left !important;
+    font-family: var(--font-sans) !important;
+}
+
+.ltr-content h1, 
+.ltr-content h2, 
+.ltr-content h3, 
+.ltr-content h4, 
+.ltr-content h5, 
+.ltr-content h6 {
+    font-family: var(--font-sans) !important;
+    text-align: left !important;
+}
+
+.ltr-content p, 
+.ltr-content ul, 
+.ltr-content ol {
+    direction: ltr !important;
+    text-align: left !important;
+}

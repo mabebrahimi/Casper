@@ -3,12 +3,12 @@
 {{!-- The tag above means: insert everything in this file
 into the {body} tag of the default.hbs template --}}
 
-
 {{#post}}
 {{!-- Everything inside the #post block pulls data from the post --}}
 
 <main id="site-main" class="site-main">
-<article class="article {{post_class}} {{#match @custom.post_image_style "Full"}}image-full{{else match @custom.post_image_style "=" "Small"}}image-small{{/match}}">
+{{!-- Ali - Check if post has Persian tag and add rtl-content class only if it does --}}
+<article class="article {{post_class}} {{#match @custom.post_image_style "Full"}}image-full{{else match @custom.post_image_style "=" "Small"}}image-small{{/match}} {{#has tag="فارسی"}}rtl-content{{/has}}">
 
     <header class="article-header gh-canvas">
 
@@ -31,6 +31,43 @@ into the {body} tag of the default.hbs template --}}
                             if (content) content.classList.add('rtl-content');
                             if (title) title.classList.add('rtl-content');
                             if (excerpt) excerpt.classList.add('rtl-content');
+                        });
+                    </script>
+                {{/has}}
+                
+                {{!-- Ali - If not Persian tag, ensure LTR --}}
+                {{^has name="فارسی"}}
+                    <script>
+                        // Ensure LTR for English posts
+                        document.addEventListener('DOMContentLoaded', function() {
+                            var article = document.querySelector('.article');
+                            var content = document.querySelector('.gh-content');
+                            var title = document.querySelector('.article-title');
+                            var excerpt = document.querySelector('.article-excerpt');
+                            
+                            if (article) {
+                                article.classList.remove('rtl-content');
+                                article.style.direction = 'ltr';
+                                article.style.textAlign = 'left';
+                            }
+                            
+                            if (content) {
+                                content.classList.remove('rtl-content');
+                                content.style.direction = 'ltr';
+                                content.style.textAlign = 'left';
+                            }
+                            
+                            if (title) {
+                                title.classList.remove('rtl-content');
+                                title.style.direction = 'ltr';
+                                title.style.textAlign = 'left';
+                            }
+                            
+                            if (excerpt) {
+                                excerpt.classList.remove('rtl-content');
+                                excerpt.style.direction = 'ltr';
+                                excerpt.style.textAlign = 'left';
+                            }
                         });
                     </script>
                 {{/has}}
@@ -99,7 +136,7 @@ into the {body} tag of the default.hbs template --}}
 
     </header>
 
-    <section class="gh-content gh-canvas">
+    <section class="gh-content gh-canvas {{^has tag="فارسی"}}ltr-content{{/has}}">
         {{content}}
     </section>
 
@@ -108,8 +145,6 @@ into the {body} tag of the default.hbs template --}}
             {{comments}}
         </section>
     {{/if}}
-
-    {{!-- Ali - Removed language switcher buttons from post --}}
 
 </article>
 </main>
