@@ -280,7 +280,7 @@ production stylesheet in assets/built/screen.css
 
 .has-cover:not(.home-template) .gh-head {
     /* background-color: var(--ghost-accent-color); */
-    background-color: #151819;
+    background-color: #5f5f5f;
     color: #fff;
 }
 
@@ -2195,6 +2195,7 @@ html.dark-mode .post-card-image {
 
 html.dark-mode :is(.post-card-tags, .post-card-meta, .article-tag a, .byline-meta-content, .pagination .page-number) {
     color: color-mod(var(--color-secondary-text) l(-22%));
+    direction: ltr;
 }
 
 html.dark-mode .post-card-featured {

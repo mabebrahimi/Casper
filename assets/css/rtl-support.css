@@ -179,12 +179,12 @@ h1.article-title {
 }
 
 .site-header-content.outer {
-    background-color: #151819 !important;
+    background-color: #5f5f5f !important;
 }
 
 /* Override all header background colors */
 .gh-head * {
-    --ghost-accent-color: #151819 !important;
+    --ghost-accent-color: #5f5f5f !important;
 }
 
 .site-header-content {
