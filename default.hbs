@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{@site.locale}}"{{#match @custom.color_scheme "Dark"}} class="dark-mode"{{else match @custom.color_scheme "Auto"}} class="auto-color"{{/match}}>
+<html lang="{{@site.locale}}" class="dark-mode">
 <head>
 
     {{!-- Basic meta - advanced meta is output with {ghost_head} below --}}
@@ -8,6 +8,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    {{!-- Ali - Early RTL detection to prevent flashing --}}
+    <script>
+    (function() {
+        // Check URL for Persian tag indicator
+        var isPersianPage = window.location.pathname === "/" || 
+                         document.cookie.indexOf("persian_content=true") > -1;
+                        
+        // Apply RTL class early if needed
+        if (isPersianPage) {
+            document.documentElement.classList.add('has-persian-content');
+            document.cookie = "persian_content=true; path=/; max-age=3600";
+        }
+    })();
+    </script>
+    
+    <style>
+    /* Critical RTL styles to apply immediately */
+    .has-persian-content .gh-content,
+    .has-persian-content .article-title,
+    .has-persian-content .article-excerpt,
+    .has-persian-content .rtl-content,
+    .rtl-content {
+        direction: rtl !important;
+        text-align: right !important;
+        font-family: 'Vazir', Tahoma, Arial, sans-serif !important;
+    }
+    </style>
     
     {{!-- Preload scripts --}}
     <link rel="preload" as="style" href="{{asset "built/screen.css"}}" />
@@ -43,7 +71,7 @@
                 <button class="gh-burger" aria-label="Main Menu"></button>
             </div>
 
-            {{!-- Ali - Removed rtl-content class from menu --}}
+            {{!-- Ali - Menu always without RTL --}}
             <nav class="gh-head-menu">
                 {{navigation}}
                 {{#unless @site.members_enabled}}
@@ -73,8 +101,6 @@
                         {{/unless}}
                     </div>
                 {{/unless}}
-
-                {{!-- Ali - Removed language switcher buttons from menu --}}
             </div>
         </div>
     </header>
@@ -156,6 +182,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (excerpt) {
                     excerpt.classList.add('rtl-content');
                 }
+                
+                // Set cookie to remember this is a Persian page
+                document.cookie = "persian_content=true; path=/; max-age=3600";
             }
         }
     });
@@ -173,6 +202,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (cardTitle) cardTitle.classList.add('rtl-content');
             if (cardExcerpt) cardExcerpt.classList.add('rtl-content');
+            
+            // Set cookie to remember this site has Persian content
+            document.cookie = "persian_content=true; path=/; max-age=3600";
         }
     });
     
@@ -188,6 +220,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (parent) {
                 parent.classList.add('rtl-content');
             }
+            
+            // Set cookie to remember this site has Persian content
+            document.cookie = "persian_content=true; path=/; max-age=3600";
         }
     });
 });
