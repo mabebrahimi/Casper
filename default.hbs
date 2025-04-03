@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{@site.locale}}" class="dark-mode">
+<html lang="{{@site.locale}}"{{#match @custom.color_scheme "Dark"}} class="dark-mode"{{else match @custom.color_scheme "Auto"}} class="auto-color"{{else}} class="dark-mode"{{/match}}>
 <head>
 
     {{!-- Basic meta - advanced meta is output with {ghost_head} below --}}
