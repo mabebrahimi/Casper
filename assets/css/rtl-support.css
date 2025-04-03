@@ -100,7 +100,7 @@
 
 .rtl-content .author-profile-image {
     margin-right: 0;
-    margin-left: 10px;
+    /* margin-left: 10px; */
 }
 
 .rtl-content .post-card-meta > * + *:not(script)::before {
@@ -110,6 +110,10 @@
 /* Dark mode */
 .dark-mode .rtl-content blockquote {
     border-right-color: #fff;
+}
+
+.article-byline {
+    direction: ltr;
 }
 
 /* Ali - Removed language switcher styling */

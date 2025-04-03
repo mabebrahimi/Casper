@@ -279,7 +279,8 @@ production stylesheet in assets/built/screen.css
 }
 
 .has-cover:not(.home-template) .gh-head {
-    background-color: var(--ghost-accent-color);
+    /* background-color: var(--ghost-accent-color); */
+    background-color: #151819;
     color: #fff;
 }
 
