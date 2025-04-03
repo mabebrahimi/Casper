@@ -17,6 +17,23 @@ into the {body} tag of the default.hbs template --}}
                 <span class="post-card-primary-tag">
                     <a href="{{url}}">{{name}}</a>
                 </span>
+                {{!-- Ali - Added RTL detection for Persian tag --}}
+                {{#has name="فارسی"}}
+                    <script>
+                        // Add RTL class to article
+                        document.addEventListener('DOMContentLoaded', function() {
+                            var article = document.querySelector('.article');
+                            var content = document.querySelector('.gh-content');
+                            var title = document.querySelector('.article-title');
+                            var excerpt = document.querySelector('.article-excerpt');
+                            
+                            if (article) article.classList.add('rtl-content');
+                            if (content) content.classList.add('rtl-content');
+                            if (title) title.classList.add('rtl-content');
+                            if (excerpt) excerpt.classList.add('rtl-content');
+                        });
+                    </script>
+                {{/has}}
             {{/primary_tag}}
             {{#if featured}}
                 <span class="post-card-featured">{{> "icons/fire"}} Featured</span>
@@ -91,6 +108,15 @@ into the {body} tag of the default.hbs template --}}
             {{comments}}
         </section>
     {{/if}}
+
+    {{!-- Language switcher buttons --}}
+    <div class="language-switch-post gh-canvas">
+        {{#has tag="فارسی"}}
+            <a href="/en/">English version</a>
+        {{else}}
+            <a href="/">نسخه فارسی</a>
+        {{/has}}
+    </div>
 
 </article>
 </main>

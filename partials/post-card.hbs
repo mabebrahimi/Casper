@@ -42,6 +42,23 @@ which templates loop over to generate a list of posts. --}}
                 <div class="post-card-tags">
                     {{#primary_tag}}
                         <span class="post-card-primary-tag">{{name}}</span>
+                        {{!-- Ali - Added RTL detection for Persian tag in post cards --}}
+                        {{#has name="فارسی"}}
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                var card = document.currentScript.closest('.post-card');
+                                if (card) {
+                                    card.classList.add('rtl-content');
+                                    
+                                    var title = card.querySelector('.post-card-title');
+                                    var excerpt = card.querySelector('.post-card-excerpt');
+                                    
+                                    if (title) title.classList.add('rtl-content');
+                                    if (excerpt) excerpt.classList.add('rtl-content');
+                                }
+                            });
+                        </script>
+                        {{/has}}
                     {{/primary_tag}}
                     {{#if featured}}
                         <span class="post-card-featured">{{> "icons/fire"}} Featured</span>

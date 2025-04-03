@@ -1,0 +1,155 @@
+/* Ali - Persian styles for RTL content */
+.rtl-content {
+    direction: rtl;
+    text-align: right;
+    font-family: 'Vazir', Tahoma, Arial, sans-serif;
+}
+
+.rtl-content h1, 
+.rtl-content h2, 
+.rtl-content h3, 
+.rtl-content h4, 
+.rtl-content h5, 
+.rtl-content h6 {
+    font-family: 'Vazir', Tahoma, Arial, sans-serif;
+}
+
+.rtl-content ul, 
+.rtl-content ol {
+    padding-right: 30px;
+    padding-left: 0;
+}
+
+.rtl-content blockquote {
+    border-left: none;
+    border-right: 3px solid var(--ghost-accent-color);
+    padding-left: 0;
+    padding-right: 1.5em;
+}
+
+/* Fix icon direction in RTL mode */
+.rtl-content .icon {
+    transform: scaleX(-1);
+}
+
+/* Increase line height for better Persian text readability */
+.rtl-content p {
+    line-height: 2;
+    margin-bottom: 1.5em;
+}
+
+/* Styles for Persian text in post cards */
+.post-card.rtl-content .post-card-title,
+.post-card.rtl-content .post-card-excerpt {
+    text-align: right;
+    direction: rtl;
+}
+
+/* Styles for Persian text in article content */
+.article.rtl-content .article-title,
+.article.rtl-content .article-excerpt,
+.article.rtl-content .gh-content {
+    text-align: right;
+    direction: rtl;
+}
+
+/* Styles for specific content elements in Persian */
+.rtl-content .kg-gallery-container,
+.rtl-content .kg-bookmark-container {
+    direction: ltr;
+}
+
+.rtl-content .kg-bookmark-content {
+    direction: rtl;
+    text-align: right;
+}
+
+/* Vazir font settings */
+@font-face {
+    font-family: 'Vazir';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.eot');
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.eot?#iefix') format('embedded-opentype'),
+         url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.woff') format('woff'),
+         url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Vazir';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Bold.eot');
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Bold.eot?#iefix') format('embedded-opentype'),
+         url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Bold.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Bold.woff') format('woff'),
+         url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Additional fixes for RTL elements */
+.rtl-content .post-full-meta {
+    text-align: right;
+}
+
+.rtl-content .author-list {
+    justify-content: flex-end;
+}
+
+.rtl-content .author-profile-image {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+.rtl-content .post-card-meta > * + *:not(script)::before {
+    margin: 0 6px 0 0;
+}
+
+/* Dark mode */
+.dark-mode .rtl-content blockquote {
+    border-right-color: #fff;
+}
+
+/* Language switcher buttons */
+.language-switch {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.language-switch a {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: #fff;
+    background-color: var(--ghost-accent-color);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.language-switch a:hover {
+    opacity: 0.9;
+}
+
+/* Ali - Post language switcher */
+.language-switch-post {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.language-switch-post a {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 4px;
+    color: #fff;
+    background-color: var(--ghost-accent-color);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.language-switch-post a:hover {
+    opacity: 0.9;
+}

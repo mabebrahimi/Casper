@@ -1,0 +1,51 @@
+name: Build Ghost Theme
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'yarn'
+        
+    - name: Install dependencies
+      run: yarn install
+      
+    - name: Build theme assets
+      run: npx gulp build
+      
+    - name: Create ZIP package
+      run: npx gulp zip
+      
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: casper-rtl-theme
+        path: dist/casper.zip
+        
+    - name: Create Release
+      if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: dist/casper.zip
+        tag_name: v${{ github.run_number }}
+        name: RTL Theme Release v${{ github.run_number }}
+        body: |
+          RTL version of Ghost Casper theme
+          This version has been automatically built.
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

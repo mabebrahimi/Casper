@@ -13,6 +13,10 @@
     <link rel="preload" as="style" href="{{asset "built/screen.css"}}" />
     <link rel="preload" as="script" href="{{asset "built/casper.js"}}" />
 
+    {{!-- Ali - Fixed CSS path for RTL support --}}
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="{{asset "css/rtl-support.css"}}" />
+
     {{!-- Theme assets - use the {asset} helper to reference styles & scripts,
     this will take care of caching and cache-busting automatically --}}
     <link rel="stylesheet" type="text/css" href="{{asset "built/screen.css"}}" />
@@ -39,7 +43,7 @@
                 <button class="gh-burger" aria-label="Main Menu"></button>
             </div>
 
-            <nav class="gh-head-menu">
+            <nav class="gh-head-menu {{#is "home"}}rtl-content{{/is}}">
                 {{navigation}}
                 {{#unless @site.members_enabled}}
                     {{#match @custom.navigation_layout "Stacked"}}
@@ -68,6 +72,15 @@
                         {{/unless}}
                     </div>
                 {{/unless}}
+
+                {{!-- Language switcher buttons --}}
+                <div class="language-switch">
+                    {{#is "english"}}
+                        <a href="/">فارسی</a>
+                    {{else}}
+                        <a href="/en/">English</a>
+                    {{/is}}
+                </div>
             </div>
         </div>
     </header>
@@ -78,7 +91,7 @@
     </div>
 
     {{!-- The global footer at the very bottom of the screen --}}
-    <footer class="site-footer outer">
+    <footer class="site-footer outer {{#is "home"}}rtl-content{{/is}}">
         <div class="inner">
             <section class="copyright"><a href="{{@site.url}}">{{@site.title}}</a> &copy; {{date format="YYYY"}}</section>
             <nav class="site-footer-nav">
@@ -110,6 +123,79 @@ $(document).ready(function () {
     });
     // FitVids - Makes video embeds responsive
     $(".gh-content").fitVids();
+});
+</script>
+
+{{!-- Ali - Improved Persian language detection script --}}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Persian text detection function
+    function hasPersianText(text) {
+        return /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/.test(text);
+    }
+    
+    // 1. Detect Persian tag in post page
+    var primaryTagLinks = document.querySelectorAll('.article-tag .post-card-primary-tag a, .post-card-primary-tag a');
+    
+    primaryTagLinks.forEach(function(tagLink) {
+        if (tagLink && tagLink.textContent.trim() === 'فارسی') {
+            // Add class to post card or article
+            var container = tagLink.closest('.post-card, .article');
+            if (container) {
+                container.classList.add('rtl-content');
+            }
+            
+            // Add class to main content
+            if (container && container.classList.contains('article')) {
+                var content = document.querySelector('.gh-content');
+                if (content) {
+                    content.classList.add('rtl-content');
+                }
+                
+                // Add class to titles
+                var title = document.querySelector('.article-title');
+                if (title) {
+                    title.classList.add('rtl-content');
+                }
+                
+                var excerpt = document.querySelector('.article-excerpt');
+                if (excerpt) {
+                    excerpt.classList.add('rtl-content');
+                }
+            }
+        }
+    });
+    
+    // 2. Detect Persian tag in post cards
+    var postCards = document.querySelectorAll('.post-card');
+    postCards.forEach(function(card) {
+        var tagSpan = card.querySelector('.post-card-primary-tag');
+        if (tagSpan && tagSpan.textContent.trim() === 'فارسی') {
+            card.classList.add('rtl-content');
+            
+            // Add class to inner elements
+            var cardTitle = card.querySelector('.post-card-title');
+            var cardExcerpt = card.querySelector('.post-card-excerpt');
+            
+            if (cardTitle) cardTitle.classList.add('rtl-content');
+            if (cardExcerpt) cardExcerpt.classList.add('rtl-content');
+        }
+    });
+    
+    // 3. Detect Persian content in text
+    var textElements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, .post-card-title, .post-card-excerpt, .article-title, .gh-content, blockquote, li');
+    
+    textElements.forEach(function(el) {
+        if (el.textContent && hasPersianText(el.textContent)) {
+            el.classList.add('rtl-content');
+            
+            // Add class to parents as well
+            var parent = el.closest('.post-card, .article');
+            if (parent) {
+                parent.classList.add('rtl-content');
+            }
+        }
+    });
 });
 </script>
 
