@@ -1,19 +1,12 @@
 {{!< default}}
 
-{{!-- The tag above means: insert everything in this file
-into the {body} tag of the default.hbs template --}}
-
-
 {{#post}}
-{{!-- Everything inside the #post block pulls data from the page --}}
-
 <main id="site-main" class="site-main">
-<article class="article {{post_class}}">
+<article class="article {{post_class}} ltr-content" dir="ltr">
 
-    {{#match @page.show_title_and_feature_image}}
-        <header class="article-header gh-canvas">
-
-            <h1 class="article-title">{{title}}</h1>
+    <header class="article-header gh-canvas">
+        {{#match @page.show_title_and_feature_image}}
+            <h1 class="article-title ltr-content" dir="ltr">{{title}}</h1>
 
             {{#if feature_image}}
                 <figure class="article-image">
@@ -33,15 +26,71 @@ into the {body} tag of the default.hbs template --}}
                     {{/if}}
                 </figure>
             {{/if}}
+        {{/match}}
+    </header>
 
-        </header>
-    {{/match}}
-
-    <section class="gh-content gh-canvas">
+    <section class="gh-content gh-canvas ltr-content" dir="ltr">
         {{content}}
     </section>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Force all static pages to be LTR by default
+            var article = document.querySelector('.article');
+            var content = document.querySelector('.gh-content');
+            var title = document.querySelector('.article-title');
+            
+            // Check if page contains Persian content
+            var hasPersian = function(text) {
+                return /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/.test(text);
+            };
+            
+            var contentText = content ? content.textContent : '';
+            var titleText = title ? title.textContent : '';
+            
+            if (hasPersian(contentText) || hasPersian(titleText)) {
+                // Has Persian content, make it RTL
+                if (article) {
+                    article.classList.remove('ltr-content');
+                    article.classList.add('rtl-content');
+                    article.setAttribute('dir', 'rtl');
+                }
+                
+                if (content) {
+                    content.classList.remove('ltr-content');
+                    content.classList.add('rtl-content');
+                    content.setAttribute('dir', 'rtl');
+                }
+                
+                if (title) {
+                    title.classList.remove('ltr-content');
+                    title.classList.add('rtl-content');
+                    title.setAttribute('dir', 'rtl');
+                }
+            } else {
+                // English content, ensure LTR
+                if (article) {
+                    article.classList.remove('rtl-content');
+                    article.classList.add('ltr-content');
+                    article.setAttribute('dir', 'ltr');
+                }
+                
+                if (content) {
+                    content.classList.remove('rtl-content');
+                    content.classList.add('ltr-content');
+                    content.setAttribute('dir', 'ltr');
+                }
+                
+                if (title) {
+                    title.classList.remove('rtl-content');
+                    title.classList.add('ltr-content');
+                    title.setAttribute('dir', 'ltr');
+                    title.style.textAlign = 'left';
+                }
+            }
+        });
+    </script>
+
 </article>
 </main>
-
 {{/post}}

@@ -1,26 +1,17 @@
 {{!< default}}
 
-{{!-- The tag above means: insert everything in this file
-into the {body} tag of the default.hbs template --}}
-
 {{#post}}
-{{!-- Everything inside the #post block pulls data from the post --}}
-
 <main id="site-main" class="site-main">
-{{!-- Ali - Check if post has Persian tag and add rtl-content class only if it does --}}
 <article class="article {{post_class}} {{#match @custom.post_image_style "Full"}}image-full{{else match @custom.post_image_style "=" "Small"}}image-small{{/match}} {{#has tag="فارسی"}}rtl-content{{/has}}">
 
     <header class="article-header gh-canvas">
-
         <div class="article-tag post-card-tags">
             {{#primary_tag}}
                 <span class="post-card-primary-tag">
                     <a href="{{url}}">{{name}}</a>
                 </span>
-                {{!-- Ali - Added RTL detection for Persian tag --}}
                 {{#has name="فارسی"}}
                     <script>
-                        // Add RTL class to article
                         document.addEventListener('DOMContentLoaded', function() {
                             var article = document.querySelector('.article');
                             var content = document.querySelector('.gh-content');
@@ -33,54 +24,103 @@ into the {body} tag of the default.hbs template --}}
                             if (excerpt) excerpt.classList.add('rtl-content');
                         });
                     </script>
-                {{/has}}
-                
-                {{!-- Ali - If not Persian tag, ensure LTR --}}
-                {{^has name="فارسی"}}
+                {{else}}
                     <script>
-                        // Ensure LTR for English posts
                         document.addEventListener('DOMContentLoaded', function() {
                             var article = document.querySelector('.article');
                             var content = document.querySelector('.gh-content');
                             var title = document.querySelector('.article-title');
                             var excerpt = document.querySelector('.article-excerpt');
+                            var header = document.querySelector('.article-header');
                             
+                            // Force LTR for English content
                             if (article) {
                                 article.classList.remove('rtl-content');
-                                article.style.direction = 'ltr';
-                                article.style.textAlign = 'left';
+                                article.classList.add('ltr-content');
+                                article.setAttribute('dir', 'ltr');
                             }
                             
                             if (content) {
                                 content.classList.remove('rtl-content');
-                                content.style.direction = 'ltr';
-                                content.style.textAlign = 'left';
+                                content.classList.add('ltr-content');
+                                content.setAttribute('dir', 'ltr');
                             }
                             
                             if (title) {
                                 title.classList.remove('rtl-content');
-                                title.style.direction = 'ltr';
+                                title.classList.add('ltr-content');
+                                title.setAttribute('dir', 'ltr');
                                 title.style.textAlign = 'left';
                             }
                             
                             if (excerpt) {
                                 excerpt.classList.remove('rtl-content');
-                                excerpt.style.direction = 'ltr';
-                                excerpt.style.textAlign = 'left';
+                                excerpt.classList.add('ltr-content');
+                                excerpt.setAttribute('dir', 'ltr');
+                            }
+                            
+                            if (header) {
+                                header.classList.remove('rtl-content');
+                                header.classList.add('ltr-content');
+                                header.setAttribute('dir', 'ltr');
                             }
                         });
                     </script>
                 {{/has}}
+            {{/primary_tag}}
+            {{^primary_tag}}
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // No primary tag - assume English
+                        var article = document.querySelector('.article');
+                        var content = document.querySelector('.gh-content');
+                        var title = document.querySelector('.article-title');
+                        var excerpt = document.querySelector('.article-excerpt');
+                        var header = document.querySelector('.article-header');
+                        
+                        // Force LTR for English content
+                        if (article) {
+                            article.classList.remove('rtl-content');
+                            article.classList.add('ltr-content');
+                            article.setAttribute('dir', 'ltr');
+                        }
+                        
+                        if (content) {
+                            content.classList.remove('rtl-content');
+                            content.classList.add('ltr-content');
+                            content.setAttribute('dir', 'ltr');
+                        }
+                        
+                        if (title) {
+                            title.classList.remove('rtl-content');
+                            title.classList.add('ltr-content');
+                            title.setAttribute('dir', 'ltr');
+                            title.style.textAlign = 'left';
+                        }
+                        
+                        if (excerpt) {
+                            excerpt.classList.remove('rtl-content');
+                            excerpt.classList.add('ltr-content');
+                            excerpt.setAttribute('dir', 'ltr');
+                        }
+                        
+                        if (header) {
+                            header.classList.remove('rtl-content');
+                            header.classList.add('ltr-content');
+                            header.setAttribute('dir', 'ltr');
+                        }
+                    });
+                </script>
             {{/primary_tag}}
             {{#if featured}}
                 <span class="post-card-featured">{{> "icons/fire"}} Featured</span>
             {{/if}}
         </div>
 
-        <h1 class="article-title">{{title}}</h1>
+        <h1 class="article-title {{#has tag="فارسی"}}rtl-content{{else}}ltr-content{{/has}}" {{#has tag="فارسی"}}dir="rtl"{{else}}dir="ltr"{{/has}}>{{title}}</h1>
 
         {{#if custom_excerpt}}
-            <p class="article-excerpt">{{custom_excerpt}}</p>
+            <p class="article-excerpt {{#has tag="فارسی"}}rtl-content{{else}}ltr-content{{/has}}" {{#has tag="فارسی"}}dir="rtl"{{else}}dir="ltr"{{/has}}>{{custom_excerpt}}</p>
         {{/if}}
 
         <div class="article-byline">
@@ -136,7 +176,7 @@ into the {body} tag of the default.hbs template --}}
 
     </header>
 
-    <section class="gh-content gh-canvas {{^has tag="فارسی"}}ltr-content{{/has}}">
+    <section class="gh-content gh-canvas {{#has tag="فارسی"}}rtl-content{{else}}ltr-content{{/has}}" {{#has tag="فارسی"}}dir="rtl"{{else}}dir="ltr"{{/has}}>
         {{content}}
     </section>
 
@@ -145,7 +185,6 @@ into the {body} tag of the default.hbs template --}}
             {{comments}}
         </section>
     {{/if}}
-
 </article>
 </main>
 

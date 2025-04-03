@@ -1,8 +1,8 @@
 /* Ali - Persian styles for RTL content */
 .rtl-content {
-    direction: rtl;
-    text-align: right;
-    font-family: 'Vazir', Tahoma, Arial, sans-serif;
+    direction: rtl !important;
+    text-align: right !important;
+    font-family: 'Vazir', Tahoma, Arial, sans-serif !important;
 }
 
 .rtl-content h1, 
@@ -11,57 +11,57 @@
 .rtl-content h4, 
 .rtl-content h5, 
 .rtl-content h6 {
-    font-family: 'Vazir', Tahoma, Arial, sans-serif;
+    font-family: 'Vazir', Tahoma, Arial, sans-serif !important;
 }
 
 .rtl-content ul, 
 .rtl-content ol {
-    padding-right: 30px;
-    padding-left: 0;
+    padding-right: 30px !important;
+    padding-left: 0 !important;
 }
 
 .rtl-content blockquote {
-    border-left: none;
-    border-right: 3px solid var(--ghost-accent-color);
-    padding-left: 0;
-    padding-right: 1.5em;
+    border-left: none !important;
+    border-right: 3px solid var(--ghost-accent-color) !important;
+    padding-left: 0 !important;
+    padding-right: 1.5em !important;
 }
 
 /* Fix icon direction in RTL mode */
 .rtl-content .icon {
-    transform: scaleX(-1);
+    transform: scaleX(-1) !important;
 }
 
 /* Increase line height for better Persian text readability */
 .rtl-content p {
-    line-height: 2;
-    margin-bottom: 1.5em;
+    line-height: 2 !important;
+    margin-bottom: 1.5em !important;
 }
 
 /* Styles for Persian text in post cards */
 .post-card.rtl-content .post-card-title,
 .post-card.rtl-content .post-card-excerpt {
-    text-align: right;
-    direction: rtl;
+    text-align: right !important;
+    direction: rtl !important;
 }
 
 /* Styles for Persian text in article content */
 .article.rtl-content .article-title,
 .article.rtl-content .article-excerpt,
 .article.rtl-content .gh-content {
-    text-align: right;
-    direction: rtl;
+    text-align: right !important;
+    direction: rtl !important;
 }
 
 /* Styles for specific content elements in Persian */
 .rtl-content .kg-gallery-container,
 .rtl-content .kg-bookmark-container {
-    direction: ltr;
+    direction: ltr !important;
 }
 
 .rtl-content .kg-bookmark-content {
-    direction: rtl;
-    text-align: right;
+    direction: rtl !important;
+    text-align: right !important;
 }
 
 /* Vazir font settings */
@@ -91,33 +91,35 @@
 
 /* Additional fixes for RTL elements */
 .rtl-content .post-full-meta {
-    text-align: right;
+    text-align: right !important;
 }
 
 .rtl-content .author-list {
-    justify-content: flex-end;
+    justify-content: flex-end !important;
 }
 
 .rtl-content .author-profile-image {
-    margin-right: 0;
-    /* margin-left: 10px; */
+    margin-right: 0 !important;
+    /* margin-left: 10px !important; */
 }
 
 .rtl-content .post-card-meta > * + *:not(script)::before {
-    margin: 0 6px 0 0;
+    margin: 0 6px 0 0 !important;
 }
 
 /* Dark mode */
 .dark-mode .rtl-content blockquote {
-    border-right-color: #fff;
+    border-right-color: #fff !important;
 }
 
-.article-byline {
-    direction: ltr;
-}
-
-/* Ali - Explicit LTR styling for English content */
+/* Ali - Strong LTR styles for English content */
 .ltr-content {
+    direction: ltr !important;
+    text-align: left !important;
+    font-family: var(--font-sans) !important;
+}
+
+.article-title.ltr-content {
     direction: ltr !important;
     text-align: left !important;
     font-family: var(--font-sans) !important;
@@ -129,13 +131,62 @@
 .ltr-content h4, 
 .ltr-content h5, 
 .ltr-content h6 {
-    font-family: var(--font-sans) !important;
+    direction: ltr !important;
     text-align: left !important;
+    font-family: var(--font-sans) !important;
 }
 
-.ltr-content p, 
-.ltr-content ul, 
+.ltr-content p,
+.ltr-content ul,
 .ltr-content ol {
     direction: ltr !important;
     text-align: left !important;
+}
+
+/* Specifically target article titles */
+h1.article-title {
+    direction: inherit !important;
+    text-align: inherit !important;
+}
+
+/* Force direction attributes */
+[dir="ltr"] {
+    direction: ltr !important;
+    text-align: left !important;
+}
+
+[dir="rtl"] {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+/* Ali - Force dark header and nav */
+.gh-head,
+#gh-head,
+.site-header-content {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+.home-template .gh-head {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+.has-cover .gh-head {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+.site-header-content.outer {
+    background-color: #000 !important;
+}
+
+/* Override all header background colors */
+.gh-head * {
+    --ghost-accent-color: #000 !important;
+}
+
+.site-header-content {
+    background-color: var(--color-darkgrey) !important;
 }
